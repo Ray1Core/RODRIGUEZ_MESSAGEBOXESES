@@ -1,0 +1,241 @@
+/* ==========================================================================
+   Auth pages (Login / Register)
+   A self-contained, full-viewport split-screen design that is intentionally
+   separate from the portfolio site's one-page theme (no Portfolio / About /
+   Contact navigation lives here). Login and Register mirror each other's
+   layout with swapped panel sides + accent colors so they read as two
+   distinct screens rather than the same template reused.
+   ========================================================================== */
+
+.auth-body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.auth-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 1rem;
+  border-radius: 0.35rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.auth-back-btn:hover,
+.auth-back-btn:focus {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+/* Brand / hero panel */
+.auth-brand {
+  flex: 1 1 42%;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  padding: 4rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-brand::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.12), transparent 55%),
+    radial-gradient(circle at 85% 85%, rgba(255, 255, 255, 0.10), transparent 50%);
+  pointer-events: none;
+}
+
+.auth-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #fff;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-brand-mark i {
+  font-size: 1.35rem;
+}
+
+.auth-brand-heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 2.1rem;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-brand-text {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 1.05rem;
+  max-width: 26rem;
+  opacity: 0.92;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-brand-foot {
+  margin-top: 3.5rem;
+  font-family: "Lato", sans-serif;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  position: relative;
+  z-index: 1;
+}
+
+/* Login: teal, panel on the left */
+.auth-login .auth-brand {
+  order: 1;
+  background: linear-gradient(160deg, #1abc9c 0%, #14967d 100%);
+}
+.auth-login .auth-form-panel {
+  order: 2;
+}
+
+/* Register: navy, panel on the right (mirrored) so the two screens are
+   visually distinct from one another, not just re-skinned copies. */
+.auth-register .auth-brand {
+  order: 2;
+  background: linear-gradient(200deg, #2c3e50 0%, #1c2b38 100%);
+}
+.auth-register .auth-form-panel {
+  order: 1;
+}
+
+/* Form panel */
+.auth-form-panel {
+  flex: 1 1 58%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  padding: 3rem 1.5rem;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 26rem;
+}
+
+.auth-register .auth-card {
+  max-width: 30rem;
+}
+
+.auth-card-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.auth-card-subtitle {
+  font-family: "Lato", sans-serif;
+  color: var(--bs-gray-600);
+  margin-bottom: 2rem;
+}
+
+.auth-switch-link {
+  font-weight: 700;
+  color: var(--bs-primary);
+}
+
+.auth-register .auth-switch-link {
+  color: var(--bs-secondary);
+}
+
+/* Centered jQuery alert overlay (used by Register page's #registerOutput)
+   so the full result — including the details list — is always fully
+   visible in the middle of the screen instead of inline in the card. */
+.js-alert-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1050;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.js-alert-backdrop.show {
+  display: flex;
+}
+
+.alert-center-modal {
+  position: relative;
+  width: 100%;
+  max-width: 38rem;
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: 0;
+  padding: 2rem 2.25rem;
+  font-size: 1.1rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
+  border-radius: 0.5rem;
+}
+
+/* Register success/details card: white background, black text,
+   regardless of the alert-success/alert-danger color it would
+   otherwise get from Bootstrap. */
+.alert-center-modal.alert-success,
+.alert-center-modal.alert-danger {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #dee2e6;
+}
+
+@media (max-width: 991.98px) {
+  .auth-brand {
+    padding: 2.75rem 1.75rem;
+    min-height: 220px;
+  }
+  .auth-brand-heading {
+    font-size: 1.6rem;
+  }
+  .auth-brand-foot {
+    margin-top: 1.75rem;
+  }
+  .auth-form-panel {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
